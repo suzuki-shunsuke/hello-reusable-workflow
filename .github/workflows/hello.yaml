@@ -1,0 +1,19 @@
+name: Hello
+on:
+  workflow_call:
+    inputs:
+      runs-on:
+        required: false
+        type: string
+        default: '"ubuntu-latest"'
+        description: |
+          JSON string for runs-on.
+          e.g.
+          runs-on: '"macos-latest"'
+          runs-on: '["foo"]'
+jobs:
+  hello:
+    runs-on: ${{fromJSON(inputs.runs-on)}}
+    permissions: {}
+    steps:
+      - run: echo "Hello"
